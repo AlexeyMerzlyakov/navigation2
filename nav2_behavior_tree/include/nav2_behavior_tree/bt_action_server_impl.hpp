@@ -25,6 +25,7 @@
 #include "nav2_msgs/action/navigate_to_pose.hpp"
 
 #include "nav2_behavior_tree/bt_action_server.hpp"
+#include "nav2_util/node_utils.hpp"
 
 namespace nav2_behavior_tree
 {
@@ -49,7 +50,7 @@ BtActionServer<ActionT>::BtActionServer(
   clock_ = node->get_clock();
 
   // Declare this node's parameters
-  node->declare_parameter("default_bt_xml_filename");
+  nav2_util::declare_parameter_if_not_declared(node, "default_bt_xml_filename");
   node->declare_parameter("enable_groot_monitoring", true);
   node->declare_parameter("groot_zmq_publisher_port", 1666);
   node->declare_parameter("groot_zmq_server_port", 1667);

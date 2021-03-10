@@ -21,6 +21,8 @@
 
 #include "rclcpp/rclcpp.hpp"
 
+#include "nav2_util/node_utils.hpp"
+
 using namespace std::chrono_literals;
 using namespace std::placeholders;
 
@@ -38,7 +40,7 @@ LifecycleManager::LifecycleManager()
 
   // The list of names is parameterized, allowing this module to be used with a different set
   // of nodes
-  declare_parameter("node_names");
+  nav2_util::declare_parameter_if_not_declared(this, "node_names");
   declare_parameter("autostart", rclcpp::ParameterValue(false));
   declare_parameter("bond_timeout", 4.0);
 

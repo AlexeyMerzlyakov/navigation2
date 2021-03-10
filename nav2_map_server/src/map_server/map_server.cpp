@@ -55,6 +55,7 @@
 #include "yaml-cpp/yaml.h"
 #include "lifecycle_msgs/msg/state.hpp"
 #include "nav2_map_server/map_io.hpp"
+#include "nav2_util/node_utils.hpp"
 
 using namespace std::chrono_literals;
 using namespace std::placeholders;
@@ -68,7 +69,7 @@ MapServer::MapServer()
   RCLCPP_INFO(get_logger(), "Creating");
 
   // Declare the node parameters
-  declare_parameter("yaml_filename");
+  nav2_util::declare_parameter_if_not_declared(this, "yaml_filename");
   declare_parameter("topic_name", "map");
   declare_parameter("frame_id", "map");
 }

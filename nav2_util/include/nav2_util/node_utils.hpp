@@ -89,7 +89,9 @@ void declare_parameter_if_not_declared(
   rcl_interfaces::msg::ParameterDescriptor())
 {
   if (!node->has_parameter(param_name)) {
-    node->declare_parameter(param_name, default_value, parameter_descriptor);
+    rcl_interfaces::msg::ParameterDescriptor pd = parameter_descriptor;
+    pd.dynamic_typing = true;
+    node->declare_parameter(param_name, default_value, pd);
   }
 }
 
